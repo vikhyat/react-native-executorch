@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { MessageType } from '../types';
 import MarkdownComponent from './MarkdownComponent';
-import LlamaIcon from '../assets/icons/llama_icon.svg';
+import ChatIcon from '../assets/icons/chat_icon.svg';
 import ColorPalette from '../colors';
 
 interface MessageItemProps {
@@ -14,10 +14,12 @@ const MessageItem = memo(({ message }: MessageItemProps) => {
     <View style={message.from === 'ai' ? styles.aiMessage : styles.userMessage}>
       {message.from === 'ai' && (
         <View style={styles.aiMessageIconContainer}>
-          <LlamaIcon width={24} height={24} />
+          <ChatIcon width={24} height={24} />
         </View>
       )}
+
       <MarkdownComponent text={message.text} />
+      {/* <MarkdownComponent text={message.isImage ? "image" : "text"} /> */}
     </View>
   );
 });

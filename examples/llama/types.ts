@@ -1,7 +1,7 @@
 export type SenderType = 'user' | 'ai';
 
 export interface MessageType {
-  text: string;
-  from: SenderType;
-  isImage?: boolean;
-}
+    text: string;
+    from: SenderType;
+    isImage?: boolean;
+} 

@@ -11,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import SWMIcon from '../assets/icons/swm_icon.svg';
+import MoondreamIcon from '../assets/icons/md_icon.svg';
 import SendIcon from '../assets/icons/send_icon.svg';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { LLAMA3_2_1B_QLORA, useLLM } from 'react-native-executorch';
@@ -68,8 +68,8 @@ export default function ChatScreen() {
           keyboardVerticalOffset={Platform.OS === 'android' ? 30 : 0}
         >
           <View style={styles.topContainer}>
-            <SWMIcon width={45} height={45} />
-            <Text style={styles.textModelName}>Llama 3.2 1B QLoRA</Text>
+              <MoondreamIcon width={45} height={45} />
+              <Text style={styles.textModelName}>Moondream</Text>
           </View>
           {chatHistory.length ? (
             <View style={styles.chatContainer}>

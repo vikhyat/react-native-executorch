@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "llama",
-    "slug": "llama",
+    "name": "moondream",
+    "slug": "moondream",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icons/icon.png",

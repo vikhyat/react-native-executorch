@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { ScrollView, StyleSheet, View, Text } from 'react-native';
 import { MessageType } from '../types';
 import AnimatedChatLoading from './AnimatedChatLoading';
-import LlamaIcon from '../assets/icons/llama_icon.svg';
+import ChatIcon from '../assets/icons/chat_icon.svg';
 import ColorPalette from '../colors';
 import MessageItem from './MessageItem';
 
@@ -32,7 +32,7 @@ export default function Messages({
           {isGenerating && (
             <View style={styles.aiMessage}>
               <View style={styles.aiMessageIconContainer}>
-                <LlamaIcon width={24} height={24} />
+                <ChatIcon width={24} height={24} />
               </View>
               {!llmResponse ? (
                 <View style={styles.messageLoadingContainer}>
