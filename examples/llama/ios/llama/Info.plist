@@ -44,6 +44,8 @@
       <key>NSAllowsLocalNetworking</key>
       <true/>
     </dict>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>We need access to your photo library to upload images for analysis.</string>
     <key>UIAppFonts</key>
     <array>
       <string>Aeonik-Regular.otf</string>

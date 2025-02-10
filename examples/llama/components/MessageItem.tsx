@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { MessageType } from '../types';
 import MarkdownComponent from './MarkdownComponent';
 import ChatIcon from '../assets/icons/chat_icon.svg';
@@ -18,8 +18,11 @@ const MessageItem = memo(({ message }: MessageItemProps) => {
         </View>
       )}
 
-      <MarkdownComponent text={message.text} />
-      {/* <MarkdownComponent text={message.isImage ? "image" : "text"} /> */}
+      {message.isImage ? (
+        <Image source={{ uri: message.text }} style={styles.image} />
+      ) : (
+          <MarkdownComponent text={message.text} />
+      )}
     </View>
   );
 });
@@ -57,5 +60,10 @@ const styles = StyleSheet.create({
     lineHeight: 19.6,
     color: ColorPalette.primary,
     fontFamily: 'regular',
+  },
+  image: {
+    width: 200,
+    height: 150,
+    borderRadius: 8,
   },
 });

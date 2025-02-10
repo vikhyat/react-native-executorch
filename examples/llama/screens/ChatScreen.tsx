@@ -9,16 +9,19 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
+  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MoondreamIcon from '../assets/icons/md_icon.svg';
 import SendIcon from '../assets/icons/send_icon.svg';
+import ImageIcon from '../assets/icons/image_icon.svg';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { LLAMA3_2_1B_QLORA, useLLM } from 'react-native-executorch';
 import PauseIcon from '../assets/icons/pause_icon.svg';
 import ColorPalette from '../colors';
 import Messages from '../components/Messages';
 import { MessageType, SenderType } from '../types';
+import * as ImagePicker from 'expo-image-picker';
 
 export default function ChatScreen() {
   const [chatHistory, setChatHistory] = useState<Array<MessageType>>([]);
@@ -30,16 +33,55 @@ export default function ChatScreen() {
     contextWindowLength: 6,
   });
   const textInputRef = useRef<TextInput>(null);
+
   useEffect(() => {
     if (llama.response && !llama.isGenerating) {
       appendToMessageHistory(llama.response, 'ai');
     }
   }, [llama.response, llama.isGenerating]);
 
-  const appendToMessageHistory = (input: string, role: SenderType) => {
+  const pickImage = async () => {
+    try {
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          Alert.alert(
+            'Permission Denied',
+            'Please grant camera roll permissions to upload images.',
+            [
+              { text: 'OK' }
+            ]
+          );
+          return;
+        }
+      }
+
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+
+      if (!result.canceled && result.assets && result.assets.length > 0) {
+        appendToMessageHistory(result.assets[0].uri, 'user', true);
+      }
+    } catch (error) {
+      console.error('Error picking image:', error);
+      Alert.alert(
+        'Error',
+        'There was an error selecting the image. Please try again.',
+        [
+          { text: 'OK' }
+        ]
+      );
+    }
+  };
+
+  const appendToMessageHistory = (input: string, role: SenderType, isImage: boolean = false) => {
     setChatHistory((prevHistory) => [
       ...prevHistory,
-      { text: input, from: role },
+      { text: input, from: role, isImage },
     ]);
   };
 
@@ -89,6 +131,12 @@ export default function ChatScreen() {
           )}
 
           <View style={styles.bottomContainer}>
+              <TouchableOpacity
+                style={styles.imageButton}
+                onPress={pickImage}
+              >
+                <ImageIcon height={24} width={24} />
+              </TouchableOpacity>
             <TextInput
               onFocus={() => setIsTextInputFocused(true)}
               onBlur={() => setIsTextInputFocused(false)}
@@ -173,6 +221,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 16,
+  },
+  imageButton: {
+    padding: 8,
+    marginRight: 8,
+    borderRadius: 8,
   },
   textInput: {
     flex: 1,
