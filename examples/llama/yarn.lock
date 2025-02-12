@@ -1716,6 +1716,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lenml/tokenizers@npm:^3.0.3":
+  version: 3.0.3
+  resolution: "@lenml/tokenizers@npm:3.0.3"
+  checksum: 418bf1299a1ef7b06df2002f5904cbd469275acc8bff06e8bc4c78ec006d12b0a766bc640392fd4e7c687462f80bcb7366d9a3ff601124412a167f9ce666d5e7
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -5451,6 +5458,7 @@ __metadata:
   resolution: "llama@workspace:."
   dependencies:
     "@babel/core": ^7.25.2
+    "@lenml/tokenizers": ^3.0.3
     "@react-native/metro-config": ^0.76.3
     "@types/react": ~18.3.12
     expo: ~52.0.11

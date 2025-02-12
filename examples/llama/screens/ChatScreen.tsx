@@ -57,9 +57,7 @@ export default function ChatScreen() {
       }
 
       let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
-        aspect: [4, 3],
         quality: 1,
       });
 
@@ -138,19 +136,19 @@ export default function ChatScreen() {
                 <ImageIcon height={24} width={24} />
               </TouchableOpacity>
             <TextInput
-              onFocus={() => setIsTextInputFocused(true)}
-              onBlur={() => setIsTextInputFocused(false)}
-              style={{
+                onFocus={() => setIsTextInputFocused(true)}
+                onBlur={() => setIsTextInputFocused(false)}
+                style={{
                 ...styles.textInput,
-                borderColor: isTextInputFocused
-                  ? ColorPalette.blueDark
-                  : ColorPalette.blueLight,
-              }}
-              placeholder="Your message"
-              placeholderTextColor={'#C1C6E5'}
-              multiline={true}
-              ref={textInputRef}
-              onChangeText={(text: string) => setUserInput(text)}
+                  borderColor: isTextInputFocused
+                    ? ColorPalette.blueDark
+                    : ColorPalette.blueLight,
+                }}
+                placeholder="Your message"
+                placeholderTextColor={'#C1C6E5'}
+                multiline={false}
+                ref={textInputRef}
+                onChangeText={(text: string) => setUserInput(text)}
             />
             {userInput && (
               <TouchableOpacity
